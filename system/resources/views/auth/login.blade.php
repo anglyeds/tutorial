@@ -4,33 +4,37 @@
 
 <div class=container>
     <div class="row">
+    <h1 class="text-center">SMA Merchandising Web</h1>
         <div class="col-md-4">
          
          </div>
         <div class="col-md-4">
          
-         {!! Form::open(['url' => 'auth/login']) !!}
+         {!! Form::open(array('route' => 'handleLogin')) !!}
 
-        <div class="form-group"> 
-
+        <div class="form-group">
+          <select class="form-control" name="username">
+          @foreach($user as $value)
+          <option>{{ $value->name }} </option>
+          @endforeach
+          </select>
          {!! Form::label('email', 'Email') !!}
-         {!! Form::select('size', ['L' => 'Large', 'S' => 'Small'], null, array('class' => 'form-control', 'placeholder' => 'pick a size...')) !!}
+         {!! Form::text('email',null,array('class' => 'form-control')) !!}
 
         </div>
         <div class="form-group"> 
 
          {!! Form::label('password', 'Password') !!}
-         {!! Form::password('password', ['class' => 'form-control']) !!}
+         {!! Form::password('password', array('class' => 'form-control')) !!}
 
         </div>
         <div class="form-group">
-
-         {!! Form::submit('Submit', ['class' => 'btn btn-primary form-control']) !!}
-
+         {!! Form::token() !!}
+         {!! Form::submit('Submit', array('class' => 'btn btn-primary')) !!}
         </div>
         {!! Form::close() !!}
 
-        <a href="{{ url('auth/register') }}"><input type="submit" value="Register" class="btn btn-danger"></a>
+       <!--  <a href="{{ url('auth/register') }}"><input type="submit" value="Register" class="btn btn-danger"></a> -->
         
         </div>
         <div class="col-md-4">

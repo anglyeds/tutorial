@@ -2,23 +2,39 @@
 
 @section('content')
 
+
+<!-- Collective Form -->
+ {!! 
+ Form::macro('myField', function()
+    {
+        return '<input type="text" class="form-control" name=username>';
+    });
+ !!}
+
 <div class=container>
+    <h1 class="text-center">SMA Merchandising Web</h1>
     <div class="row">
         <div class="col-md-4">
-         
+
          </div>
+         
         <div class="col-md-4">
          
          {!! Form::open(['url' => 'auth/register']) !!}
 
         <div class="form-group"> 
          {!! Form::label('name', 'Name') !!}
-         {!! Form::text('username', array('class' => 'form-control')) !!}
+         {!! Form::myField(); !!}         
+        </div>
+
+        <div class="form-group"> 
+         {!! Form::label('email', 'Email Address') !!}
+         {!! Form::text('email',Input::old('email'),array('class' => 'form-control')); !!}         
         </div>
 
         <div class="form-group"> 
          {!! Form::label('password', 'Password') !!}
-         {!! Form::password('password', ['class' => 'form-control']) !!}
+         {!! Form::password('password', array('class' => 'form-control')) !!}
         </div>
 
         <div class="form-group"> 
@@ -26,7 +42,6 @@
         </div>
 
         {!! Form::close() !!}
-        <a href="{{ url('auth/register') }}"><input type="submit" value="Register" class="btn btn-danger"></a>
         </div>
 
         <div class="col-md-4">

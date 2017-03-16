@@ -1,12 +1,12 @@
 <?php 
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Registration;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
-use App\Http\Requests\EmployeeStoreRequest;
-use App\Http\Requests\EmployeeUpdateRequest;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use \Auth, \Redirect, \Validator, \Input, \Session, \Hash;
 use Illuminate\Http\Request;
 
@@ -24,8 +24,8 @@ class RegisterController extends Controller {
 	 */
 	public function index()
 	{
-			$user = User::all();
-			return view('user.index')->with('user', $user);
+		$user = User::all();
+		return view('auth.index')->with('user', $user);
 	}
 
 	/**
@@ -35,7 +35,8 @@ class RegisterController extends Controller {
 	 */
 	public function create()
 	{
-			return view('user.create');
+		// folder.file
+		return view('auth.register');
 	}
 
 	/**
@@ -43,17 +44,19 @@ class RegisterController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(EmployeeStoreRequest $request)
+	public function store(UserStoreRequest $request)
 	{
-	            // store
-	            $users = new User;
-	            $users->name = Input::get('name');
-	            $users->email = Input::get('email');
-	            $users->password = Hash::make(Input::get('password'));
-	            $users->save();
-	            
-	            Session::flash('message', 'You have successfully added employee');
-	            return Redirect::to('employees');
+        // store
+		/*		dd($request);
+		        $users = new User;
+		        $users->name = Input::get('name');
+		        $users->email = Input::get('email');
+		        $users->password = Hash::make(Input::get('password'));
+		        $users->save();
+		        
+		        dd($users);
+		        Session::flash('message', 'You have successfully added a new user');*/
+        return view('auth.login');
 	}
 
 	/**
@@ -75,9 +78,9 @@ class RegisterController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$employees = User::find($id);
-        return view('employee.edit')
-            ->with('employee', $employees);
+		$users = User::find($id);
+        return view('auth.edit')
+            ->with('user', $users);
 	}
 
 	/**
@@ -90,7 +93,7 @@ class RegisterController extends Controller {
 	{
 		if($id == 1)
 		{
-			Session::flash('message', 'You cannot edit admin on TutaPOS demo');
+			Session::flash('message', 'You cannot edit admin');
 			Session::flash('alert-class', 'alert-danger');
 	            return Redirect::to('employees');
 		}
