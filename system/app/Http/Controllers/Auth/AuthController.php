@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 
 use Auth;
@@ -26,7 +26,7 @@ class AuthController extends Controller
 
     public function handleLogin(Request $request)
     {
-
+        $this->validate($request, User::$login_validation_rules);
         $data = $request->only('name','password');
         //$hashPW = \Hash::make('1234qwer');
         try{
@@ -38,9 +38,13 @@ class AuthController extends Controller
              echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         
-        return back()->withInput();
+        return back()->withInput()->withErrors(['password' => 'Wrong Password!']);
     }
 
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('login');
+    }
     public function index()
     {
         //

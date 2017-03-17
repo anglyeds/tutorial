@@ -9,17 +9,27 @@
          
          </div>
         <div class="col-md-4">
-         
+         @if(count($errors))
+            <div class="alert alert-danger">
+                <ul>
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+                </ul>
+            </div>
+         @endif
          {!! Form::open(array('route' => 'handleLogin')) !!}
 
         <div class="form-group">
-          <select class="form-control" name="username">
+        
+          <select class="form-control" name="name">
           @foreach($user as $value)
           <option>{{ $value->name }} </option>
           @endforeach
           </select>
-         {!! Form::label('email', 'Email') !!}
-         {!! Form::text('email',null,array('class' => 'form-control')) !!}
+
+<!--          {!! Form::label('email', 'Email') !!}
+         {!! Form::text('email',null,array('class' => 'form-control')) !!} -->
 
         </div>
         <div class="form-group"> 
@@ -30,7 +40,7 @@
         </div>
         <div class="form-group">
          {!! Form::token() !!}
-         {!! Form::submit('Submit', array('class' => 'btn btn-primary')) !!}
+         {!! Form::submit('Submit', array('class' => 'btn btn-primary form-control')) !!}
         </div>
         {!! Form::close() !!}
 

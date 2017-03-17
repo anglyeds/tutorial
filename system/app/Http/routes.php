@@ -21,8 +21,11 @@ Route::get('/welcome', function () {
 
 // Authentication routes...
 Route::group(['middleware' => ['web']], function() {
-	Route::get('/login',['as' => 'login', 'uses' => 'AuthController@login']);
-	Route::post('/handleLogin',['as' => 'handleLogin', 'uses' => 'AuthController@handleLogin']); 
-	Route::get('/login',['as' => 'login', 'uses' => 'userController@home']);
+	Route::get('/login',['as' => 'login', 'uses' => 'Auth\AuthController@login']);
+	Route::get('/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@logout']);
+	Route::post('/handleLogin',['as' => 'handleLogin', 'uses' => 'Auth\AuthController@handleLogin']); 
+	Route::get('/home', ['middleware' => 'auth','as' => 'home', 'uses' => 'UsersController@home']);
+	Route::resource('/users', 'UsersController',['only' => ['create', 'store']]);
+	
 });
 

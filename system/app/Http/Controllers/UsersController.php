@@ -2,45 +2,20 @@
 
 namespace App\Http\Controllers;
 
-
-use Auth;
 use Illuminate\Http\Request;
 
-use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
+use Auth;
 
-class AuthController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function login()
-    {
-        $users = User::all();
-        return view('auth.login')->with('user', $users); 
-    }
-
-    public function handleLogin(Request $request)
-    {
-
-        $data = $request->only('name','password');
-        //$hashPW = \Hash::make('1234qwer');
-        try{
-            //dd($hashPW);
-            if(Auth::attempt($data)){
-                return redirect()->intended('home');
-            }
-        } catch (Exception $e) {
-             echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        
-        return back()->withInput();
-    }
-
     public function index()
     {
         //
@@ -53,7 +28,7 @@ class AuthController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -64,7 +39,16 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, User::$register_validation_rules);
+        $data = $request->only('name','password');
+        $data['password'] = bcrypt($data['password']);
+        $user = User::create($data);
+        if($user){
+            Auth::login($user);
+            return redirect()->route('home');
+        }
+
+        return back()->withInput();
     }
 
     /**
@@ -110,5 +94,10 @@ class AuthController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function home()
+    {
+        return view('home.home');
     }
 }

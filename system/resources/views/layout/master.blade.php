@@ -17,6 +17,22 @@
 
   </head>
   <body>
+  <div class="container">
+    <ul class="nav nav-pills">
+    @if(Auth::check())
+      <li>
+        {!! link_to_route('logout', 'Logout') !!}
+      </li>
+    @else
+      <li>
+        {!! link_to_route('login', 'Login') !!}
+      </li>    
+    @endif
+     <li>
+        {!! link_to_route('users.create', 'New User') !!}
+      </li>
+    </ul>
+  </div>
   @yield('content')
 
   </body>
