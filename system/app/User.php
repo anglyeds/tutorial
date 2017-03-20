@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 namespace App;
 
@@ -47,4 +47,5 @@ class User extends Model implements AuthenticatableContract,
         'email' => 'required|email|unique:users',
         'password' => 'required'
     ];
+
 }

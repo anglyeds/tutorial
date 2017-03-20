@@ -6,10 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
-use Auth;
+use App\Week;
 
-class UsersController extends Controller
+class WeeksController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +17,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('home.dashboard')->with('user',$users);
+        //
     }
 
     /**
@@ -29,7 +27,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('weeks.create');
     }
 
     /**
@@ -40,16 +38,18 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, User::$register_validation_rules);
-        $data = $request->only('name','email','password');
-        $data['password'] = bcrypt($data['password']);
-        $user = User::create($data);
-        if($user){
-            Auth::login($user);
-            return redirect()->route('home');
-        }
+        $this->validate($request, Week::$week_validation_rules);
+        $data = $request->only('week', 'date_start', 'date_end');
+        $week = Week::create($data);
 
-        return back()->withInput();
+        try{
+            if($week){
+                $weeks = Week::all();
+                return view('weeks.index')->with('week', $weeks);
+            }
+        } catch (Exception $e) {
+             echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
     }
 
     /**
@@ -95,11 +95,5 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function home()
-    {
-        $users = User::all();
-        return view('home.dashboard')->with('user',$users);
     }
 }

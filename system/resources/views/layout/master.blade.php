@@ -31,6 +31,10 @@
      <li>
         {!! link_to_route('users.create', 'New User') !!}
       </li>
+
+     <li>
+        {!! link_to_route('weeks.create', 'Add Week') !!}
+      </li>
     </ul>
   </div>
   @yield('content')

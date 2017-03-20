@@ -26,6 +26,6 @@ Route::group(['middleware' => ['web']], function() {
 	Route::post('/handleLogin',['as' => 'handleLogin', 'uses' => 'Auth\AuthController@handleLogin']); 
 	Route::get('/home', ['middleware' => 'auth','as' => 'home', 'uses' => 'UsersController@home']);
 	Route::resource('/users', 'UsersController',['only' => ['create', 'store']]);
-	
+	Route::resource('/weeks', 'WeeksController',['only' => ['create', 'store']]);
 });
 
