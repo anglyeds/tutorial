@@ -27,5 +27,7 @@ Route::group(['middleware' => ['web']], function() {
 	Route::get('/home', ['middleware' => 'auth','as' => 'home', 'uses' => 'UsersController@home']);
 	Route::resource('/users', 'UsersController',['only' => ['create', 'store']]);
 	Route::resource('/weeks', 'WeeksController',['only' => ['create', 'store']]);
+	Route::resource('/chains', 'ChainsController',['only' => ['create', 'store']]);
+	Route::resource('/stores', 'StoresController',['only' => ['create', 'store']]);
 });
 

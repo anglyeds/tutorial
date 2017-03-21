@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Chain;
+use App\Store;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Week;
 
-class WeeksController extends Controller
+class StoresController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,8 @@ class WeeksController extends Controller
      */
     public function create()
     {
-        return view('weeks.create');
+        $chains = Chain::all();
+        return view('stores.create')->with('chain',$chains);
     }
 
     /**
@@ -39,24 +41,25 @@ class WeeksController extends Controller
     public function store(Request $request)
     {
         //Validate the requests
-        $this->validate($request, Week::$week_validation_rules);
-
+        $this->validate($request, Store::$store_validation_rules);
+               
         //Consolidate all requests
-        $data = $request->only('week', 'date_start', 'date_end');
-
+        $data = $request->only('chain_id','code','name','address','display_name', 'description');
         //Insert data into database
-        $week = Week::create($data);
+        $stores = Store::create($data);
 
         try{
-            if($week){
-                //Select all data from table week
-                $weeks = Week::all();
-                return view('weeks.index')->with('week', $weeks);
+            if($stores){
+                //Select all data from table chain
+                $stores = Store::all();
+                return view('stores.index')->with('store', $stores);
             }
         } catch (Exception $e) {
              echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
     }
+
+
 
     /**
      * Display the specified resource.

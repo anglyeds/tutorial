@@ -29,6 +29,6 @@ class CreateWeeksTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('weeks');
     }
 }

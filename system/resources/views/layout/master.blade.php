@@ -35,6 +35,15 @@
      <li>
         {!! link_to_route('weeks.create', 'Add Week') !!}
       </li>
+
+     <li>
+        {!! link_to_route('chains.create', 'Add Chain') !!}
+      </li>
+
+      <li>
+        {!! link_to_route('stores.create', 'Add Store') !!}
+      </li>
+
     </ul>
   </div>
   @yield('content')
