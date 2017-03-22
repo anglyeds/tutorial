@@ -34,7 +34,8 @@ class CreateMarketsRelationship extends Migration
 
         Schema::create('stores', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code')->unique();
+            $table->int('chain_id');
+            $table->int('code')->unique();
             $table->string('name');
             $table->string('address');
             $table->string('display_name')->nullable();
@@ -62,18 +63,6 @@ class CreateMarketsRelationship extends Migration
             $table->string('fail_reason')->nullable();
             $table->timestamps();
         });
-
-        Schema::create('chain_store', function (Blueprint $table) {
-            $table->integer('chain_id')->unsigned();
-            $table->integer('store_id')->unsigned();
-
-            $table->foreign('chain_id')->references('id')->on('chains')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('store_id')->references('id')->on('stores')
-                ->onUpdate('cascade')->onDelete('cascade');
-
-            $table->primary(['chain_id', 'store_id']);
-        }); 
 
         Schema::create('store_job', function(Blueprint $table){
             $table->integer('store_id')->unsigned();
