@@ -7,6 +7,7 @@ use Auth;
 use Illuminate\Http\Request;
 
 use App\User;
+use App\Week;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -32,7 +33,8 @@ class AuthController extends Controller
         try{
             //dd($hashPW);
             if(Auth::attempt($data)){
-                return redirect()->intended('home');
+                $weeks = Week::all();
+                return redirect()->intended('/weeks/select')->with('week', $weeks);
             }
         } catch (Exception $e) {
              echo 'Caught exception: ',  $e->getMessage(), "\n";

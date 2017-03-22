@@ -21,7 +21,7 @@
 					<tbody>
 					@foreach($store as $value)
 						<tr>
-							<td>{{ $value->chain_id }}</td>
+							<td>{{ $value->chain->name }}</td>
 							<td>{{ $value->code }}</td>
 							<td>{{ $value->name }}</td>
 							<td>{{ $value->address }}</td>

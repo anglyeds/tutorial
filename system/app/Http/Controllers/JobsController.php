@@ -2,45 +2,18 @@
 
 namespace App\Http\Controllers;
 
-
-use Auth;
 use Illuminate\Http\Request;
 
-use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class AuthController extends Controller
+class JobsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function login()
-    {
-        $users = User::all();
-        return view('auth.login')->with('user', $users); 
-    }
-
-    public function handleLogin(Request $request)
-    {
-
-        $data = $request->only('name','password');
-        //$hashPW = \Hash::make('1234qwer');
-        try{
-            //dd($hashPW);
-            if(Auth::attempt($data)){
-                return redirect()->intended('home');
-            }
-        } catch (Exception $e) {
-             echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        
-        return back()->withInput();
-    }
-
     public function index()
     {
         //

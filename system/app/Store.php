@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Chain;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -25,6 +24,6 @@ class Store extends Model
 
     public function chain()
     {
-    	return $this->belongsTo('Chain');
+    	return $this->belongsTo('App\Chain');
     }
 }

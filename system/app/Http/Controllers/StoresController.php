@@ -46,6 +46,7 @@ class StoresController extends Controller
         //Consolidate all requests
         $data = $request->only('chain_id','code','name','address','display_name', 'description');
         //Insert data into database
+        //dd($data);
         $stores = Store::create($data);
 
         try{

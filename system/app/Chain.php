@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Store;
 
 class Chain extends Model
 {
@@ -18,4 +19,9 @@ class Chain extends Model
     	'display_name' => 'required',
     	'description' => 'required',
     ];
+
+/*    public function store()
+    {
+        return $this->hasMany('Store');
+    }*/
 }

@@ -58,6 +58,12 @@ class WeeksController extends Controller
         }
     }
 
+    public function select(){
+        $weekdays = Week::where('week','like','wd%')->get();
+        $weekends = Week::where('week','like','we%')->get();
+        return view('weeks.select')->with('weekday', $weekdays)->with('weekend',$weekends);
+    }
+
     /**
      * Display the specified resource.
      *
