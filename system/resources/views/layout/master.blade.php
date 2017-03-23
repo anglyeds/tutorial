@@ -44,6 +44,10 @@
         {!! link_to_route('stores.create', 'Add Store') !!}
       </li>
 
+      <li>
+        {!! link_to_route('jobs.create', 'Add Job') !!}
+      </li>
+
     </ul>
   </div>
   @yield('content')

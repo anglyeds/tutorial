@@ -5,7 +5,7 @@
 <div class="container">
 
 	<div class="row">
-		{!! Form::open(array('route' => 'jobs.index')) !!}
+		{!! Form::open(array('route' => 'jobs.store')) !!}
 			
 		<div class="col-md-3">
 		</div>

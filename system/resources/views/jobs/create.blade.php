@@ -2,6 +2,6 @@
 
 @section('content')
 
-<h1>I am Index</h1>
+<h1>I am Create</h1>
 
 @endsection

@@ -33,8 +33,8 @@ class AuthController extends Controller
         try{
             //dd($hashPW);
             if(Auth::attempt($data)){
-                $weeks = Week::all();
-                return redirect()->intended('/weeks/select')->with('week', $weeks);
+                
+                return redirect()->intended('/weeks/select');
             }
         } catch (Exception $e) {
              echo 'Caught exception: ',  $e->getMessage(), "\n";

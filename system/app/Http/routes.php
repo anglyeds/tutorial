@@ -26,10 +26,10 @@ Route::group(['middleware' => ['web']], function() {
 	Route::post('/handleLogin',['as' => 'handleLogin', 'uses' => 'Auth\AuthController@handleLogin']); 
 	Route::get('/home', ['middleware' => 'auth','as' => 'home', 'uses' => 'UsersController@home']);
 	Route::get('/weeks/select', ['as' => 'week', 'uses' => 'WeeksController@select']);
-	Route::get('/jobs/index', ['as' => 'job', 'uses' => 'JobsController@index']);
 	Route::resource('/users', 'UsersController',['only' => ['create', 'store']]);
 	Route::resource('/weeks', 'WeeksController',['only' => ['create', 'store']]);
 	Route::resource('/chains', 'ChainsController',['only' => ['create', 'store']]);
 	Route::resource('/stores', 'StoresController',['only' => ['create', 'store']]);
+	Route::resource('/jobs', 'JobsController',['names' =>[ 'index' => 'jobs.index', 'store' => 'jobs.store']]);
 });
 
