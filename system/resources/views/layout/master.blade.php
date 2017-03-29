@@ -45,6 +45,10 @@
       </li>
 
       <li>
+        {!! link_to_route('clients.create', 'Add Client') !!}
+      </li>
+
+      <li>
         {!! link_to_route('jobs.create', 'Add Job') !!}
       </li>
 

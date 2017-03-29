@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Week;
+
 use App\Client;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class JobsController extends Controller
+class ClientsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class JobsController extends Controller
      */
     public function index()
     {
-        return view('jobs.index');
+        //
     }
 
     /**
@@ -28,9 +28,7 @@ class JobsController extends Controller
      */
     public function create()
     {
-        $weekdays = Week::where('week','like','wd%')->get();
-        $weekends = Week::where('week','like','we%')->get();
-        return view('jobs.create')->with('weekday', $weekdays)->with('weekend',$weekends);    
+        return view('clients.create');
     }
 
     /**
@@ -41,7 +39,22 @@ class JobsController extends Controller
      */
     public function store(Request $request)
     {
-        return view('jobs.store');
+        $this->validate($request, Client::$client_validation_rules);
+
+        $data = $request->only('name','description');
+
+        $clients = Client::create($data);
+
+        try
+        {
+            if($clients)
+            {
+                $chains = Chain::all();
+                return view('clients.index')->with('client', $clients);
+            }
+        } catch(Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
     }
 
     /**

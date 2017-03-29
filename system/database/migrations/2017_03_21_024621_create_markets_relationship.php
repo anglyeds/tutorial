@@ -31,17 +31,23 @@ class CreateMarketsRelationship extends Migration
             $table->string('description')->nullable();
             $table->timestamps();
         });
+    
 
         Schema::create('stores', function (Blueprint $table) {
             $table->increments('id');
-            $table->int('chain_id');
-            $table->int('code')->unique();
+            $table->integer('chain_id')->unsigned();
+            $table->foreign('chain_id')->references('id')->on('chains')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('code')->unique();
             $table->string('name');
             $table->string('address');
             $table->string('display_name')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
         });
+
+
+
+    
 
         Schema::create('jobs', function (Blueprint $table) {
             $table->increments('id');
@@ -50,30 +56,19 @@ class CreateMarketsRelationship extends Migration
             $table->string('status');
             $table->string('done_by');
             $table->string('week');
+            $table->string('type');
             $table->date('date_start');
             $table->date('date_end');
-            $table->string('display_name')->nullable();
-            $table->string('description')->nullable();
             $table->timestamps();
         });
+
+
 
         Schema::create('remarks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('remark')->nullable();
             $table->string('fail_reason')->nullable();
             $table->timestamps();
-        });
-
-        Schema::create('store_job', function(Blueprint $table){
-            $table->integer('store_id')->unsigned();
-            $table->integer('job_id')->unsigned();
-
-            $table->foreign('store_id')->references('id')->on('stores')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('job_id')->references('id')->on('jobs')
-                ->onUpdate('cascade')->onDelete('cascade');
-
-            $table->primary(['store_id', 'job_id']);
         });
 
         Schema::create('job_remark', function(Blueprint $table){
@@ -89,6 +84,17 @@ class CreateMarketsRelationship extends Migration
         });       
 
 
+        Schema::create('store_job', function(Blueprint $table){
+            $table->integer('store_id')->unsigned();
+            $table->integer('job_id')->unsigned();
+
+            $table->foreign('store_id')->references('id')->on('stores')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('job_id')->references('id')->on('jobs')
+                ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->primary(['store_id', 'job_id']);
+        });    
 
     }
 
