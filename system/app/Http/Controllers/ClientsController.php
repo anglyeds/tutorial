@@ -49,7 +49,7 @@ class ClientsController extends Controller
         {
             if($clients)
             {
-                $chains = Chain::all();
+                $clients = Client::all();
                 return view('clients.index')->with('client', $clients);
             }
         } catch(Exception $e) {

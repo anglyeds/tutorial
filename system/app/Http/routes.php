@@ -31,6 +31,7 @@ Route::group(['middleware' => ['web']], function() {
 	Route::resource('/chains', 'ChainsController',['only' => ['create', 'store']]);
 	Route::resource('/stores', 'StoresController',['only' => ['create', 'store']]);
 	Route::resource('/clients', 'ClientsController',['only' => ['create', 'store']]);
+	Route::resource('/brands', 'BrandsController',['only' => ['create', 'store']]);
 	Route::resource('/jobs', 'JobsController',['names' =>[ 'index' => 'jobs.index', 'store' => 'jobs.store']]);
 });
 

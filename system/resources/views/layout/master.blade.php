@@ -49,6 +49,10 @@
       </li>
 
       <li>
+        {!! link_to_route('brands.create', 'Add Brand') !!}
+      </li>      
+
+      <li>
         {!! link_to_route('jobs.create', 'Add Job') !!}
       </li>
 

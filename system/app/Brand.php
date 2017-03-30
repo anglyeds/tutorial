@@ -4,22 +4,23 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class Brand extends Model
 {
 	//recognize table from database
-   	protected $table = 'clients';
+   	protected $table = 'brands';
 
    	//fillable name must exactly same with the input name from the client-side form
 	protected $fillable = ['name', 'description'];
 
 	//validate every field from client-side
-    public static $client_validation_rules = [
-    	'name' => 'required|unique:clients',
+    public static $brands_validation_rules = [
+    	'name' => 'required|unique:brands',
     	'description' => 'required',
     ];
 
-/*    public function store()
+    public function client()
     {
-        return $this->hasMany('Store');
-    }*/   
+        return $this->belongsTo('App\Client');
+    }
+
 }

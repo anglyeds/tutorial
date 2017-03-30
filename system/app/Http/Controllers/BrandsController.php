@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Week;
 use App\Client;
+use App\Brand;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class JobsController extends Controller
+class BrandsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class JobsController extends Controller
      */
     public function index()
     {
-        return view('jobs.index');
+        //
     }
 
     /**
@@ -28,10 +28,8 @@ class JobsController extends Controller
      */
     public function create()
     {
-        $weekdays = Week::where('week','like','wd%')->get();
-        $weekends = Week::where('week','like','we%')->get();
-        $clients  = Client::all();
-        return view('jobs.create')->with('weekday', $weekdays)->with('weekend',$weekends)->with('client',$clients);    
+        $clients = Client::all();
+        return view('brands.create')->with('client', $clients);
     }
 
     /**
@@ -42,7 +40,22 @@ class JobsController extends Controller
      */
     public function store(Request $request)
     {
-        return view('jobs.store');
+        $this->validate($request, Brand::$brands_validation_rules);
+
+        $data = $request->only('client_id','name','description');
+        
+        $brands = Brand::create($data);
+
+        try
+        {
+            if($brands)
+            {
+                $brands = Brands::all();
+                return view('brands.index')->with('brand', $brands);
+            }
+        } catch(Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }        
     }
 
     /**

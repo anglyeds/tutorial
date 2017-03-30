@@ -6,10 +6,17 @@
 <div class="container">
 
 	<div class="row">	
-
-
+         @if(count($errors))
+            <div class="alert alert-danger">
+                <ul>
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+                </ul>
+            </div>
+         @endif	
 		<div class="col-md-12">
-		{!! Form::open(array('routes' => 'clients.store')) !!}
+		{!! Form::open(array('route' => 'clients.store')) !!}
 
 		<div class="form-group">
 		{!! Form::label('client','Client') !!}

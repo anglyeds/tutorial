@@ -12,8 +12,12 @@
 		{!! Form::open(array('routes' => 'jobs.store')) !!}
 
 		<div class="form-group">
-		{!! Form::label('clients','Client') !!}
-		{!! Form::text('client_name', '' ,array('class'=>'form-control')) !!}
+			{!! Form::label('client', 'Client') !!}
+			<select class="form-control" name="week">
+				@foreach($client as $value)
+					<option value={{ $value->id }} >{{ $value->name }} </option>
+				@endforeach							 				
+			</select>
 		</div>
 
 		<div class="form-group">

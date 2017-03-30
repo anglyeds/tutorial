@@ -11,12 +11,14 @@
 					<thead>
 						<tr>
 							<th>Client</th>
+							<th>Brand</th>
 							<th>Description</th>
 						</tr>
 					</thead>
 					<tbody>
-					@foreach($client as $value)
+					@foreach($brand as $value)
 						<tr>
+							<td>{{ $value->client->name }}</td>
 							<td>{{ $value->name }}</td>
 							<td>{{ $value->description }}</td>
 						</tr>
