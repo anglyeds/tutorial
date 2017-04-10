@@ -56,6 +56,10 @@
         {!! link_to_route('jobs.create', 'Add Job') !!}
       </li>
 
+      <li>
+        {!! link_to_route('ajax.index', 'Messages') !!}
+      </li>
+
     </ul>
   </div>
   @yield('content')

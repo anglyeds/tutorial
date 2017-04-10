@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    
-});
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -33,5 +30,12 @@ Route::group(['middleware' => ['web']], function() {
 	Route::resource('/clients', 'ClientsController',['only' => ['create', 'store']]);
 	Route::resource('/brands', 'BrandsController',['only' => ['create', 'store']]);
 	Route::resource('/jobs', 'JobsController',['names' =>[ 'index' => 'jobs.index', 'store' => 'jobs.store']]);
+	Route::resource('/ajax', 'AjaxController',['names' =>[ 'index' => 'ajax.index', 'getmsg' => 'ajax.show']]);
+
+/*	Route::get('/ajax', function () {
+    	return view('ajax.message');
+	});*/
+/*	Route::post('/getmsg','AjaxController@index');*/
+
 });
 
